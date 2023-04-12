@@ -13,6 +13,13 @@ public class Project extends JFrame
     public static void main(String[] args) 
     {
         new Project();
+        Matrix m = new Matrix(3, 3);
+        for (int i = 0; i < 3 * 3; i++)
+        {
+            m.setValue(i, (double)i + 10.0);
+        }
+        System.out.println(m.toString());
+        System.out.printf("Determinant: %f", m.determinant());
     }
 
     public Project()
@@ -51,9 +58,9 @@ class MatrixInput
         }
     }
 
-    public Matrix<Double> getValue()
+    public Matrix getValue()
     {
-        Matrix<Double> matrix = new Matrix<Double>(m, n);
+        Matrix matrix = new Matrix(m, n);
         for (int i = 0; i < m * n; i++)
         {
             matrix.setValue(i, (double)fields[i].getValue());
@@ -63,35 +70,77 @@ class MatrixInput
     }
 }
 
-class Matrix<T extends Number>
+class Matrix
 {
-    List<T> values;
+    Double[] values;
     int m;
     int n;
 
     public Matrix(int m, int n)
     {
-        values = new ArrayList<T>(m * n);
+        this.m = m;
+        this.n = n;
+        values = new Double[m * n];
     }
 
-    public T getValue(int i, int j)
+    public Double getValue(int i, int j)
     {
-        return values.get(i * n + j);
+        return values[i + j * n];
     }
 
-    public T getValue(int idx)
+    public Double getValue(int idx)
     {
-        return values.get(idx);
+        return values[idx];
     }
 
-    public void setValue(int i, int j, T value)
+    public void setValue(int i, int j, Double value)
     {
-        values.set(i * n + j, value);
+        values[i + j * n] = value;
     }
 
-    public void setValue(int idx, T value)
+    public void setValue(int idx, Double value)
     {
-        values.set(idx, value);
+        values[idx] = value;
+    }
+
+    public Matrix getMinor(int i, int j)
+    {
+        if (m < 2 || n < 2)
+            throw new IllegalStateException("This matrix does not have a minor");
+        Matrix minor = new Matrix(m - 1, n - 1);
+        int idx = 0;
+        for (int k = 0; k < m; k++)
+        {
+            if (k == i)
+                continue;
+            for (int l = 0; l < n; l++)
+            {
+                if (l == j)
+                    continue;
+                minor.setValue(idx, this.getValue(k, l));
+                idx++;
+            }
+        }
+        
+        return minor;
+    }
+
+    public Double determinant()
+    {
+        if (n != m)
+            throw new IllegalStateException("Cannot get the determinant of non-square matrices");
+
+        if (n == 2)
+            return getValue(0) * getValue(3) - getValue(1) * getValue(2);
+
+        int sign = 1;
+        Double sum = 0d;
+        for (int i = 0; i < n; i++)
+        {
+            sum += getValue(i) * sign * getMinor(i, 0).determinant();
+            sign *= -1;
+        }
+        return sum;
     }
 
     @Override
@@ -102,7 +151,7 @@ class Matrix<T extends Number>
         {
             for (int j = 0; j < n; j++)
             {
-                s += getValue(i, j) + " ";
+                s += getValue(i, j).toString() + " ";
             }
             s += "\n";
         }
