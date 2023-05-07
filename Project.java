@@ -29,8 +29,22 @@ public class Project extends JFrame
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         Container pane = getContentPane();
+        pane.setLayout(new GridLayout(5, 5));
+
         MatrixInput matrix = new MatrixInput(3, 5);
         pane.add(matrix.component);
+
+        MatrixDisplay display = new MatrixDisplay(3, 3);
+        display.setValue(Matrix.identity(3).transpose());
+        pane.add(display.component);
+
+        pane.add(new JLabel("test"));
+        pane.add(new JLabel("test"));
+        pane.add(new JLabel("test"));
+        pane.add(new JLabel("test"));
+        pane.add(new JLabel("test"));
+        pane.add(new JLabel("test"));
+        pane.add(new JLabel("test"));
         setVisible(true);
     }
 }
@@ -39,7 +53,7 @@ class MatrixInput
 {
     JComponent component;
 
-    JSpinner[] fields;
+    JTextField[] fields;
     int m;
     int n;
 
@@ -50,15 +64,15 @@ class MatrixInput
         component = new JPanel();
         component.setLayout(new GridLayout(m, n));
 
-        fields = new JSpinner[m * n];
+        fields = new JTextField[m * n];
         for (int i = 0; i < m * n; i++)
         {
-            fields[i] = new JSpinner();
+            fields[i] = new JTextField();
             component.add(fields[i]);
         }
     }
 
-    public Matrix getValue()
+    /*public Matrix getValue()
     {
         Matrix matrix = new Matrix(m, n);
         for (int i = 0; i < m * n; i++)
@@ -67,6 +81,40 @@ class MatrixInput
         }
 
         return matrix;
+    }*/
+}
+
+class MatrixDisplay
+{
+    JComponent component;
+
+    JLabel[] elements;
+    int m;
+    int n;
+
+    public MatrixDisplay(int m, int n)
+    {
+        this.m = m;
+        this.n = n;
+        component = new JPanel();
+        component.setLayout(new GridLayout(m, n));
+
+        elements = new JLabel[m * n];
+        for (int i = 0; i < m * n; i++)
+        {
+            System.out.printf("creating label %d\n", i);
+            elements[i] = new JLabel("", SwingConstants.CENTER);
+            component.add(elements[i]);
+        }
+    }
+
+    public void setValue(Matrix m)
+    {
+        for (int i = 0; i < elements.length; i++)
+        {
+            System.out.printf("setting text for %d\n", i);
+            elements[i].setText(m.getValue(i).toString());
+        }
     }
 }
 
@@ -81,6 +129,20 @@ class Matrix
         this.m = m;
         this.n = n;
         values = new Double[m * n];
+        for (int i = 0; i < values.length; i++)
+        {
+            values[i] = 0.0;
+        }
+    }
+
+    public static Matrix identity(int n)
+    {
+        Matrix m = new Matrix(n, n);
+        for (int i = 0; i < n; i++)
+        {
+            m.setValue(i, i, 1.0);
+        }
+        return m;
     }
 
     public Double getValue(int i, int j)
@@ -141,6 +203,19 @@ class Matrix
             sign *= -1;
         }
         return sum;
+    }
+
+    public Matrix transpose()
+    {
+        Matrix t = new Matrix(n, m);
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                t.setValue(i, j, this.getValue(j, i));
+            }
+        }
+        return t;
     }
 
     @Override
