@@ -1,8 +1,10 @@
+import java.util.Random;
+
 public class Matrix
 {
     Double[] values;
-    int m;
-    int n;
+    public int m;
+    public int n;
 
     public Matrix(int m, int n)
     {
@@ -23,6 +25,30 @@ public class Matrix
             m.setValue(i, i, 1.0);
         }
         return m;
+    }
+
+    public static Matrix random(int m, int n)
+    {
+        Random r = new Random();
+        Matrix mtx = new Matrix(m, n);
+        for (int i = 0; i < m * n; i++)
+        {
+            mtx.setValue(i, (double)r.nextInt(20));
+        }
+        return mtx;
+    }
+
+    public boolean isEqual(Matrix b)
+    {
+        if (this.m != b.m || this.n != b.n)
+            return false;
+
+        for (int i = 0; i < this.m * this.n; i++)
+        {
+            if (this.getValue(i) != b.getValue(i))
+                return false;
+        }
+        return true;
     }
 
     public Double getValue(int i, int j)
@@ -67,6 +93,26 @@ public class Matrix
         return minor;
     }
 
+    public RealVector getRow(int row)
+    {
+        RealVector v = new RealVector(n);
+        for (int i = 0; i < n; i++)
+        {
+            v.setValue(i, this.getValue(row, i));
+        }
+        return v;
+    }
+
+    public RealVector getColumn(int col)
+    {
+        RealVector v = new RealVector(m);
+        for (int i = 0; i < m; i++)
+        {
+            v.setValue(i, this.getValue(i, col));
+        }
+        return v;
+    }
+
     public Double determinant()
     {
         if (n != m)
@@ -96,6 +142,19 @@ public class Matrix
             }
         }
         return t;
+    }
+
+    public Matrix multiply(Matrix b) // this * b
+    {
+        Matrix result = new Matrix(this.n, b.m);
+        for (int i = 0; i < this.n; i++)
+        {
+            for (int j = 0; j < b.m; j++)
+            {
+                result.setValue(i, j, this.getRow(i).dot(b.getColumn(j)));
+            }
+        }
+        return result;
     }
 
     @Override

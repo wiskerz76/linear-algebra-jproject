@@ -6,37 +6,33 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.function.Consumer;
 
-public class NormalTextField extends JTextField {
+public class NormalButton extends JButton {
     
-    private class KbCallbackCaller implements KeyListener {
+    private class KbCallbackCaller implements ActionListener {
 
-        private Consumer<KeyEvent> cb;
+        private Consumer<ActionEvent> cb;
 
-        public KbCallbackCaller(Consumer<KeyEvent> handler)
+        public KbCallbackCaller(Consumer<ActionEvent> handler)
         {
          this.cb = handler;   
         }
 
         @Override
-        public void keyReleased(KeyEvent e) 
+        public void actionPerformed(ActionEvent e) 
         {
             this.cb.accept(e);
         }
+    }
 
-        public void keyTyped(KeyEvent e) 
-        {
-        }
-
-        public void keyPressed(KeyEvent e) 
-        {
-
-        }
+    public NormalButton(String s)
+    {
+        super(s);
     }
     
-    public void setKeyHandler(Consumer<KeyEvent> handler)
+    public void setKeyHandler(Consumer<ActionEvent> handler)
     {
         KbCallbackCaller kbcc = new KbCallbackCaller(handler);
-        this.addKeyListener(kbcc);
+        this.addActionListener(kbcc);
     }
 
     public int getValue()

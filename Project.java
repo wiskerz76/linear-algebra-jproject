@@ -4,14 +4,15 @@ import javax.swing.event.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
-/*import Matrix.*;
-import MatrixDisplay.*;
-import MatrixInput.*;*/
 
 public class Project extends JFrame
 {
     static final int WIDTH = 750;
     static final int HEIGHT = 500;
+
+    public Matrix originalMatrix;
+    public MatrixInput input;
+    public JLabel result; 
 
     public static void main(String[] args) 
     {
@@ -34,20 +35,41 @@ public class Project extends JFrame
         Container pane = getContentPane();
         pane.setLayout(new GridLayout(5, 5));
 
-        MatrixInput matrix = new MatrixInput(3, 5);
-        pane.add(matrix.component);
+        pane.add(new JLabel("Find the inverse of this matrix: "));
 
         MatrixDisplay display = new MatrixDisplay(3, 3);
-        display.setValue(Matrix.identity(3).transpose());
+        originalMatrix = Matrix.random(3, 3);
+        display.setValue(originalMatrix);
         pane.add(display.component);
+        System.out.println(originalMatrix);
 
-        pane.add(new JLabel("test"));
-        pane.add(new JLabel("test"));
-        pane.add(new JLabel("test"));
-        pane.add(new JLabel("test"));
-        pane.add(new JLabel("test"));
-        pane.add(new JLabel("test"));
-        pane.add(new JLabel("test"));
+        input = new MatrixInput(3, 3);
+        pane.add(input.component);
+
+        NormalButton btn = new NormalButton("Submit");
+        btn.setKeyHandler((ActionEvent e) -> {
+            System.out.println("click btn");
+            testSuccess();
+        });
+        pane.add(btn);
+
+        result = new JLabel();
+        pane.add(result);
+
         setVisible(true);
+    }
+
+    public void testSuccess()
+    {
+        Matrix product = input.getValue().multiply(originalMatrix);
+        System.out.println(product);
+        if (product.isEqual(Matrix.identity(3)))
+        {
+            result.setText("Correct!");
+        }
+        else 
+        {
+            result.setText("Incorrect, try again");
+        }
     }
 }

@@ -9,7 +9,7 @@ public class MatrixInput
 {
     JComponent component;
 
-    JTextField[] fields;
+    NormalTextField[] fields;
     int m;
     int n;
 
@@ -20,15 +20,20 @@ public class MatrixInput
         component = new JPanel();
         component.setLayout(new GridLayout(m, n));
 
-        fields = new JTextField[m * n];
+        fields = new NormalTextField[m * n];
         for (int i = 0; i < m * n; i++)
         {
-            fields[i] = new JTextField();
+            NormalTextField x = new NormalTextField();
+            x.setText("0");
+            fields[i] = x;
+            x.setKeyHandler((KeyEvent e) -> {
+                x.setText(x.getText().replaceAll("[a-zA-Z]", ""));
+            });
             component.add(fields[i]);
         }
     }
 
-    /*public Matrix getValue()
+    public Matrix getValue()
     {
         Matrix matrix = new Matrix(m, n);
         for (int i = 0; i < m * n; i++)
@@ -37,5 +42,5 @@ public class MatrixInput
         }
 
         return matrix;
-    }*/
+    }
 }

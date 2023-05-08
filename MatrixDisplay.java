@@ -23,7 +23,6 @@ public class MatrixDisplay
         elements = new JLabel[m * n];
         for (int i = 0; i < m * n; i++)
         {
-            System.out.printf("creating label %d\n", i);
             elements[i] = new JLabel("", SwingConstants.CENTER);
             component.add(elements[i]);
         }
@@ -33,7 +32,6 @@ public class MatrixDisplay
     {
         for (int i = 0; i < elements.length; i++)
         {
-            System.out.printf("setting text for %d\n", i);
             elements[i].setText(m.getValue(i).toString());
         }
     }
