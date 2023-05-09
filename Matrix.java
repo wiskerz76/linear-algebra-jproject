@@ -3,13 +3,7 @@ import java.util.Random;
 public class Matrix
 {
     Double[] values;
-    /*
-     * # of rows
-     */
     public int m;
-    /*
-     * # of cols
-     */
     public int n;
 
     public Matrix(int m, int n)
