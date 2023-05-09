@@ -43,4 +43,9 @@ public class MatrixInput
 
         return matrix;
     }
+
+    public JComponent getComponent()
+    {
+        return component;
+    }
 }

@@ -35,4 +35,9 @@ public class MatrixDisplay
             elements[i].setText(m.getValue(i).toString());
         }
     }
+
+    public JComponent getComponent()
+    {
+        return component;
+    }
 }

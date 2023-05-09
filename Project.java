@@ -40,11 +40,11 @@ public class Project extends JFrame
         MatrixDisplay display = new MatrixDisplay(3, 3);
         originalMatrix = Matrix.random(3, 3);
         display.setValue(originalMatrix);
-        pane.add(display.component);
+        pane.add(display.getComponent());
         System.out.println(originalMatrix);
 
         input = new MatrixInput(3, 3);
-        pane.add(input.component);
+        pane.add(input.getComponent());
 
         NormalButton btn = new NormalButton("Submit");
         btn.setKeyHandler((ActionEvent e) -> {
