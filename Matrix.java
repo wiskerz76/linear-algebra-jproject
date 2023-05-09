@@ -70,7 +70,7 @@ public class Matrix
 
     public Double getValue(int i, int j)
     {
-        return values[i + j * n];
+        return values[i * n + j];
     }
 
     public Double getValue(int idx)
@@ -80,7 +80,7 @@ public class Matrix
 
     public void setValue(int i, int j, Double value)
     {
-        values[i + j * n] = value;
+        values[i * n + j] = value;
     }
 
     public void setValue(int idx, Double value)
