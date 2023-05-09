@@ -13,21 +13,17 @@ public class Project extends JFrame
     public Matrix originalMatrix;
     public MatrixInput input;
     public JLabel result; 
+    public NormalButton next;
+    public MatrixDisplay display;
 
     public static void main(String[] args) 
     {
         new Project();
-        Matrix m = new Matrix(3, 3);
-        for (int i = 0; i < 3 * 3; i++)
-        {
-            m.setValue(i, (double)i + 10.0);
-        }
-        System.out.println(m.toString());
-        System.out.printf("Determinant: %f", m.determinant());
     }
 
     public Project()
     {
+        // Setup window
         setTitle("Linear Algebra Project");
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -37,26 +33,39 @@ public class Project extends JFrame
 
         pane.add(new JLabel("Find the inverse of this matrix: "));
 
-        MatrixDisplay display = new MatrixDisplay(3, 3);
-        originalMatrix = Matrix.randomNonSingular(3);
-        display.setValue(originalMatrix);
+        // Setup matrix to invert
+        display = new MatrixDisplay(3, 3);
         pane.add(display.getComponent());
-        System.out.println(originalMatrix);
+        generateProblem();
 
         input = new MatrixInput(3, 3);
         pane.add(input.getComponent());
 
-        NormalButton btn = new NormalButton("Submit");
-        btn.setKeyHandler((ActionEvent e) -> {
-            System.out.println("click btn");
+        NormalButton submit = new NormalButton("Submit");
+        submit.setKeyHandler((ActionEvent e) -> {
             testSuccess();
         });
-        pane.add(btn);
+        pane.add(submit);
+
+        next = new NormalButton("Next");
+        next.setKeyHandler((ActionEvent e) -> {
+            generateProblem();
+            input.clear();
+            next.setVisible(false);
+        });
+        next.setVisible(false);
 
         result = new JLabel();
         pane.add(result);
+        pane.add(next);
 
         setVisible(true);
+    }
+
+    public void generateProblem()
+    {
+        originalMatrix = Matrix.randomNonSingular(3);
+        display.setValue(originalMatrix);
     }
 
     public void testSuccess()
@@ -66,6 +75,7 @@ public class Project extends JFrame
         if (Matrix.roughlyEqual(product, Matrix.identity(3)))
         {
             result.setText("Correct!");
+            next.setVisible(true);
         }
         else 
         {

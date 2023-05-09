@@ -48,4 +48,12 @@ public class MatrixInput
     {
         return component;
     }
+
+    public void clear()
+    {
+        for (int i = 0; i < fields.length; i++)
+        {
+            fields[i].setText("");
+        }
+    }
 }
