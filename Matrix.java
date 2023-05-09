@@ -3,7 +3,13 @@ import java.util.Random;
 public class Matrix
 {
     Double[] values;
+    /*
+     * # of rows
+     */
     public int m;
+    /*
+     * # of cols
+     */
     public int n;
 
     public Matrix(int m, int n)
@@ -36,6 +42,62 @@ public class Matrix
             mtx.setValue(i, (double)r.nextInt(20));
         }
         return mtx;
+    }
+
+
+    public static Matrix randomNonSingular(int m)
+    {
+        return randomNonSingular(m, 3);
+    }
+
+    public static Matrix randomNonSingular(int m, int stepBound)
+    {
+        Random r = new Random();
+        Matrix mtx = Matrix.identity(m);
+        for(int i = 0; i < r.nextInt(stepBound);i++)
+        {
+            switch(r.nextInt(5))
+            {
+                case 0:
+                    mtx.swapRows(r.nextInt(m),r.nextInt(m));
+                    break;
+                case 1:
+                    mtx.scaleRow(r.nextInt(10) + 1.0, r.nextInt(m));
+                case 2:
+                    mtx.scaleRow(-1.0,r.nextInt(m));
+                case 3:
+                    mtx.addRows(r.nextInt(m), r.nextInt(m));
+            }
+        }
+        return mtx;
+    }
+
+    public void swapRows(int a, int b)
+    {
+        //for each column
+        for(int j = 0; j < n; j++)
+        {
+            final double old_a = getValue(a,j);
+            setValue(a,j,getValue(b,j));
+            setValue(b,j,old_a);
+        }
+    }
+
+    public void scaleRow(Double scale, int row)
+    {
+        //for each column
+        for(int j = 0; j < n; j++)
+        {
+            setValue(row, j, scale * getValue(row,j));
+        }
+    }
+
+    public void addRows(int src, int dest)
+    {
+        for(int j = 0; j < n; j++)
+        {
+            setValue(dest,j,getValue(dest,j) + getValue(src,j));
+        }
     }
 
     public boolean isEqual(Matrix b)

@@ -38,7 +38,7 @@ public class Project extends JFrame
         pane.add(new JLabel("Find the inverse of this matrix: "));
 
         MatrixDisplay display = new MatrixDisplay(3, 3);
-        originalMatrix = Matrix.random(3, 3);
+        originalMatrix = Matrix.randomNonSingular(3);
         display.setValue(originalMatrix);
         pane.add(display.getComponent());
         System.out.println(originalMatrix);
