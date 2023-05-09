@@ -39,8 +39,19 @@ public class NormalTextField extends JTextField {
         this.addKeyListener(kbcc);
     }
 
-    public int getValue()
+    public double getValue()
     {
-        return Integer.parseInt(this.getText());
+        String input = this.getText();
+        String[] splitString = input.split("/", 0);
+        if (splitString.length == 1)
+        {
+            return Double.parseDouble(input);
+        } else if (splitString.length == 2)
+        {
+            return Double.parseDouble(splitString[0]) / Double.parseDouble(splitString[1]);
+        } else 
+        {
+            throw new RuntimeException("Invalid input into matrix");
+        }
     }
 }

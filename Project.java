@@ -63,7 +63,7 @@ public class Project extends JFrame
     {
         Matrix product = input.getValue().multiply(originalMatrix);
         System.out.println(product);
-        if (product.isEqual(Matrix.identity(3)))
+        if (Matrix.roughlyEqual(product, Matrix.identity(3)))
         {
             result.setText("Correct!");
         }

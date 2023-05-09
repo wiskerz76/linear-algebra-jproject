@@ -38,7 +38,7 @@ public class MatrixInput
         Matrix matrix = new Matrix(m, n);
         for (int i = 0; i < m * n; i++)
         {
-            matrix.setValue(i, (double)fields[i].getValue());
+            matrix.setValue(i, ((NormalTextField)fields[i]).getValue());
         }
 
         return matrix;
