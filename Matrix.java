@@ -51,6 +51,23 @@ public class Matrix
         return true;
     }
 
+    public static boolean roughlyEqual(Matrix a, Matrix b)
+    {
+        final double tolerance = 0.001;
+        if(a.m != b.m || a.n != b.n)
+        {
+            return false;
+        }
+        for(int i = 0; i < a.m * a.n; i++)
+        {
+            if(Math.abs(a.getValue(i) - b.getValue(i)) >= tolerance)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public Double getValue(int i, int j)
     {
         return values[i + j * n];
