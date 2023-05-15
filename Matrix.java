@@ -27,6 +27,13 @@ public class Matrix
         return m;
     }
 
+
+    /**
+     * Generates a random matrix of size m x n
+     * @param m number f rows
+     * @param n number of columns
+     * @return matrix
+     */
     public static Matrix random(int m, int n)
     {
         Random r = new Random();
@@ -38,19 +45,27 @@ public class Matrix
         return mtx;
     }
 
-
+    /** 
+     * Generates a random, non singular square matrix
+     * @param m size of produced matrix
+     */
     public static Matrix randomNonSingular(int m)
     {
         return randomNonSingular(m, 3);
     }
 
+    /** 
+     * Generates a random, non singular square matrix by applying random row operations
+     * @param m - size of the generated matrix
+     * @param stepBound - the maximum number of steps to use
+     */
     public static Matrix randomNonSingular(int m, int stepBound)
     {
         Random r = new Random();
         Matrix mtx = Matrix.identity(m);
         for(int i = 0; i < r.nextInt(stepBound);i++)
         {
-            switch(r.nextInt(5))
+            switch(r.nextInt(4))
             {
                 case 0:
                     mtx.swapRows(r.nextInt(m),r.nextInt(m));
@@ -66,6 +81,11 @@ public class Matrix
         return mtx;
     }
 
+    /**
+     * performs an in-place swap row operation exchanging (a,b)
+     * @param a first row
+     * @param b secord row
+     */
     public void swapRows(int a, int b)
     {
         //for each column
@@ -77,6 +97,11 @@ public class Matrix
         }
     }
 
+    /**
+     * performs an in-place scaling of row "row" by scale
+     * @param scale scalar multiple of row
+     * @param row index of row to scale
+     */
     public void scaleRow(Double scale, int row)
     {
         //for each column
@@ -86,6 +111,11 @@ public class Matrix
         }
     }
 
+    /**
+     * 
+     * @param src
+     * @param dest
+     */
     public void addRows(int src, int dest)
     {
         for(int j = 0; j < n; j++)
