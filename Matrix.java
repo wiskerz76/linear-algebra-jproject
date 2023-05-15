@@ -2,6 +2,8 @@ import java.util.Random;
 
 public class Matrix
 {
+    public static final int DEFAULT_COMPLEXIFICATION = 5;
+
     Double[] values;
     public int m;
     public int n;
@@ -51,7 +53,7 @@ public class Matrix
      */
     public static Matrix randomNonSingular(int m)
     {
-        return randomNonSingular(m, 3);
+        return randomNonSingular(m, DEFAULT_COMPLEXIFICATION);
     }
 
     /** 
@@ -61,6 +63,7 @@ public class Matrix
      */
     public static Matrix randomNonSingular(int m, int stepBound)
     {
+        /* 
         Random r = new Random();
         Matrix mtx = Matrix.identity(m);
         for(int i = 0; i < stepBound;i++)
@@ -79,8 +82,105 @@ public class Matrix
             }
         }
         return mtx;
+        */
+
+        Matrix mtx = Matrix.identity(m);
+        mtx.complexify(stepBound);
+        return mtx;
+    };
+
+    /**
+     * Generates a matrix with 1s along its diagonal;excepting those that have been removed so that its nullity and rank are appropriate 
+     * @param m number of rows
+     * @param n number of columns
+     * @param nullity number of zero columns
+     * @return
+     */
+    public static Matrix baseMatrixOfRank(int m, int n, int rank)
+    {
+        Matrix mtx = new Matrix(m, n);
+        if(rank > m)
+        {
+            throw new IllegalArgumentException("Rank exceeds dimension of codomain");
+        }
+        for(int i = 0; i < rank; i++)
+        {
+            mtx.setValue(i, i, 1.0);
+        }
+        return mtx;
     }
 
+    /**
+     * returns a random matrix of rank rank
+     * @param m rows
+     * @param n cols
+     * @param rank
+     * @return
+     */
+    public static Matrix randomMatrixOfRank(int m, int n, int rank)
+    {
+        return randomMatrixOfRank(m, rank, rank, DEFAULT_COMPLEXIFICATION);
+    }
+
+    /**
+     * returns a randm matrix of ran rank
+     * @param m rows
+     * @param n cols
+     * @param rank
+     * @param stepBound
+     * @return
+     */
+    public static Matrix randomMatrixOfRank(int m, int n, int rank, int stepBound)
+    {
+        Matrix mtx = new Matrix(m,n);
+        mtx.complexify(stepBound);
+        return mtx;
+    }
+
+    /**
+     * Returns a matrix with randomly chosen numbers along the diagonal and zeros all elsewhere
+     * @param m
+     * @return
+     */
+    public static Matrix randomDiagonalMatrix(int m)
+    {
+        Matrix mtx = new Matrix(m,m);
+        Random r = new Random();
+
+        for(int i = 0; i < m; i++)
+        {
+            mtx.setValue(i, i, r.nextDouble());
+        }
+        return mtx;
+    }
+
+        /**
+     * Performs random row operations on a matrix
+     * The image, kernel, etc remain fixed
+     * @param stepBound number of row operations to perform
+     */
+    public void complexify(int stepBound)
+    { 
+        Random r = new Random();
+        for(int i = 0; i < stepBound;i++)
+        {
+            switch(r.nextInt(4))
+            {
+                case 0:
+                    swapRows(r.nextInt(m),r.nextInt(m));
+                    break;
+                case 1:
+                    scaleRow(r.nextInt(10) + 1.0, r.nextInt(m));
+                case 2:
+                    scaleRow(-1.0,r.nextInt(m));
+                case 3:
+                    addRows(r.nextInt(m), r.nextInt(m));
+            }
+        }
+    }
+
+
+    
     /**
      * performs an in-place swap row operation exchanging (a,b)
      * @param a first row
