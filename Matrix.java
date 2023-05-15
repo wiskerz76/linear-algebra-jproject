@@ -63,7 +63,7 @@ public class Matrix
     {
         Random r = new Random();
         Matrix mtx = Matrix.identity(m);
-        for(int i = 0; i < r.nextInt(stepBound);i++)
+        for(int i = 0; i < stepBound;i++)
         {
             switch(r.nextInt(4))
             {
