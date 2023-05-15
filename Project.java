@@ -18,6 +18,7 @@ public class Project extends JFrame
     MatrixDisplay display;
     Container pane;
     static Random random;
+    int difficulty = 3;
 
     public static void main(String[] args) 
     {
@@ -66,8 +67,20 @@ public class Project extends JFrame
         if (display != null)
             pane.remove(display.getComponent()); 
 
-        int size = random.nextInt(3) + 2;
-        originalMatrix = Matrix.randomNonSingular(size);
+        int size;
+        if (difficulty <= 10)
+        {
+            size = 2;
+        }  
+        else if (difficulty <= 20)
+        {
+            size = random.nextInt(3) + 1;
+        }  
+        else 
+        {
+            size = random.nextInt(3) + 1;
+        }
+        originalMatrix = Matrix.randomNonSingular(size, difficulty);
         display = new MatrixDisplay(size, size);
         display.setValue(originalMatrix);
 
@@ -87,6 +100,7 @@ public class Project extends JFrame
         if (Matrix.roughlyEqual(product, Matrix.identity(product.n)))
         {
             result.setText("Correct!");
+            difficulty += 2;
             next.setVisible(true);
         }
         else 
