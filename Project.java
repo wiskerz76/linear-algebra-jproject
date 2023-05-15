@@ -11,15 +11,6 @@ public class Project extends JFrame
     static final int WIDTH = 750;
     static final int HEIGHT = 500;
 
-    Matrix originalMatrix;
-    MatrixInput input;
-    JLabel result; 
-    NormalButton next;
-    MatrixDisplay display;
-    Container pane;
-    static Random random;
-    int difficulty = 3;
-
     public static void main(String[] args) 
     {
         new Project();
@@ -32,80 +23,15 @@ public class Project extends JFrame
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        pane = getContentPane();
-        pane.setLayout(new GridLayout(5, 5));
+        JPanel content = new JPanel(); // Panel to contain contents of each tab
+        QuestionTab[] tabs = new QuestionTab[] {new InverseFinderTab(content), new DummyTab(content)};
 
-        pane.add(new JLabel("Find the inverse of this matrix: "));
+        Container pane = getContentPane();
+        TabSwitcher tabSwitcher = new TabSwitcher(tabs, new String[] {"Inverse Finder", "Dummy"}, () -> {pane.repaint();});
 
-        // Setup matrix to invert
-        random = new Random();
-        generateProblem();
-
-        NormalButton submit = new NormalButton("Submit");
-        submit.setKeyHandler((ActionEvent e) -> {
-            testSuccess();
-        });
-        pane.add(submit);
-
-        next = new NormalButton("Next");
-        next.setKeyHandler((ActionEvent e) -> {
-            generateProblem();
-            input.clear();
-            next.setVisible(false);
-        });
-        next.setVisible(false);
-
-        result = new JLabel();
-        pane.add(result);
-        pane.add(next);
-
+        pane.setLayout(new GridLayout(2, 1));
+        pane.add(tabSwitcher.component);
+        pane.add(content);
         setVisible(true);
-    }
-
-    public void generateProblem()
-    {
-        if (display != null)
-            pane.remove(display.getComponent()); 
-
-        int size;
-        if (difficulty <= 10)
-        {
-            size = 2;
-        }  
-        else if (difficulty <= 20)
-        {
-            size = random.nextInt(3) + 1;
-        }  
-        else 
-        {
-            size = random.nextInt(3) + 1;
-        }
-        originalMatrix = Matrix.randomNonSingular(size, difficulty);
-        display = new MatrixDisplay(size, size);
-        display.setValue(originalMatrix);
-
-        pane.add(display.getComponent(), 1);
-
-        if (input != null)
-            pane.remove(input.getComponent());
-        input = new MatrixInput(size, size);
-        pane.add(input.getComponent(), 2);
-    }
-
-    public void testSuccess()
-    {
-
-        Matrix product = input.getValue().multiply(originalMatrix);
-        System.out.println(product);
-        if (Matrix.roughlyEqual(product, Matrix.identity(product.n)))
-        {
-            result.setText("Correct!");
-            difficulty += 2;
-            next.setVisible(true);
-        }
-        else 
-        {
-            result.setText("Incorrect, try again");
-        }
     }
 }
