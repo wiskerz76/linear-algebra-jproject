@@ -11,53 +11,22 @@ import java.lang.Runnable;
 public class TabSwitcher
 {
     private QuestionTab[] tabs;
-    private NormalButton[] buttons;
-    private JPanel buttonBar;
-    private QuestionTab current;
-    private JPanel component; 
-    private Runnable refresh;
+    private JTabbedPane component;
 
-    public JPanel getComponent()
+    public JTabbedPane getComponent()
     {
         return component;
     }
 
-    public TabSwitcher(QuestionTab[] tabs, String[] names, Runnable refresh)
+    public TabSwitcher(QuestionTab[] tabs, String[] names)
     {
         this.tabs = tabs;
-        this.buttons = new NormalButton[tabs.length];
-        this.buttonBar = new JPanel();
-        this.component = new JPanel();
-        this.refresh = refresh;
+        //this.component = new JPanel();
+        this.component = new JTabbedPane();        
         
-        buttonBar.setLayout(new GridLayout(1, tabs.length));
-        component.setLayout(new GridLayout(1+tabs.length, 1));
-
-        component.add(buttonBar,0);
         for(int i = 0; i < tabs.length; i++)
         {
-            final int k = i;
-            buttons[i] = new NormalButton(names[i]);
-            buttons[i].setKeyHandler((ActionEvent e) -> {
-                setCurrent(k);
-            });
-            buttonBar.add(buttons[i]);
-            component.add(tabs[i].component,i+1);
-            tabs[i].component.setVisible(false);
-            tabs[i].component.setSize(1, 1);
-            tabs[i].component.repaint();
+            component.addTab(names[i], tabs[i].component);
         }
-        current = tabs[0];
-        setCurrent(0);
     }
-
-    public void setCurrent(int contentIx)
-    {
-        current.component.setVisible(false);
-        current.component.setSize(1,1);
-        current = tabs[contentIx];
-        current.component.setVisible(true);
-        current.component.setSize(480,320);
-    }
-
 }

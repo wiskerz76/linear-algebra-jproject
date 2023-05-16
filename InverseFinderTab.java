@@ -19,7 +19,7 @@ public class InverseFinderTab extends QuestionTab
     public InverseFinderTab(JPanel content)
     {
         super(content);
-        component.setLayout(new GridLayout(5, 5));
+        component.setLayout(new GridLayout(3, 5));
 
         component.add(new JLabel("Find the inverse of this matrix: "));
 

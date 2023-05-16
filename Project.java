@@ -48,7 +48,7 @@ public class Project extends JFrame
         QuestionTab[] tabs = new QuestionTab[] {new InverseFinderTab(new JPanel()),new DummyTab(new JPanel())};
 
         Container pane = getContentPane();
-        TabSwitcher tabSwitcher = new TabSwitcher(tabs, new String[] {"Inverse Finder", "Dummy"}, () -> {pane.revalidate();});
+        TabSwitcher tabSwitcher = new TabSwitcher(tabs, new String[] {"Inverse Finder", "Dummy"}); 
 
         pane.add(tabSwitcher.getComponent());
         setVisible(true);
