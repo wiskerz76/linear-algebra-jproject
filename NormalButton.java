@@ -29,6 +29,7 @@ public class NormalButton extends JButton {
         super(s);
     }
     
+
     public void setKeyHandler(Consumer<ActionEvent> handler)
     {
         KbCallbackCaller kbcc = new KbCallbackCaller(handler);
