@@ -45,10 +45,10 @@ public class Project extends JFrame
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         JPanel content = new JPanel(); // Panel to contain contents of each tab
-        QuestionTab[] tabs = new QuestionTab[] {new InverseFinderTab(new JPanel()),new DummyTab(new JPanel())};
+        QuestionTab[] tabs = new QuestionTab[] {new InverseFinderTab(new JPanel()),new DummyTab(new JPanel()),new MultiplicationTab(new JPanel())};
 
         Container pane = getContentPane();
-        TabSwitcher tabSwitcher = new TabSwitcher(tabs, new String[] {"Inverse Finder", "Dummy"}); 
+        TabSwitcher tabSwitcher = new TabSwitcher(tabs, new String[] {"Inverse Finder", "Dummy", "Multiplication"}); 
 
         pane.add(tabSwitcher.getComponent());
         setVisible(true);

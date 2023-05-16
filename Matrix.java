@@ -42,7 +42,7 @@ public class Matrix
         Matrix mtx = new Matrix(m, n);
         for (int i = 0; i < m * n; i++)
         {
-            mtx.setValue(i, (double)r.nextInt(20));
+            mtx.setValue(i, (double)r.nextInt(10));
         }
         return mtx;
     }
