@@ -53,8 +53,15 @@ public class Project extends JFrame
             new PracticeQuizTab()
         };
 
+        String[] names = new String[]{
+            "Inverse Practice",
+            "Dummy",
+            "Multiplication Practice",
+            "Rank Practice",
+            "Practice Quiz"
+        };
         Container pane = getContentPane();
-        TabSwitcher tabSwitcher = new TabSwitcher(tabs, new String[] {"Inverse Finder", "Dummy", "Multiplication", "Rank Finder","Practice Quiz"}); 
+        TabSwitcher tabSwitcher = new TabSwitcher(tabs, names); 
 
         pane.add(tabSwitcher.getComponent());
         setVisible(true);

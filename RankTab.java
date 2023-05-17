@@ -77,7 +77,7 @@ public class RankTab extends QuestionTab
         //rank = 1;
         //matrix = new Matrix(n,m)
         
-        rank = 1;
+        rank =  random.nextInt(n + 1);
         matrix = Matrix.randomMatrixOfRank(n, m, rank); // BEN PLEASE FIX THIS THING
 
 
