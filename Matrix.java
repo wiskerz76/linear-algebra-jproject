@@ -8,6 +8,11 @@ public class Matrix
     public int m;
     public int n;
 
+    /**
+     * Constructs a default matrix (the zero matrix of size m x n)
+     * @param m number of rows
+     * @param n number of columns
+     */
     public Matrix(int m, int n)
     {
         this.m = m;
@@ -19,6 +24,11 @@ public class Matrix
         }
     }
 
+    /**
+     * Generates the n x n identity matrix
+     * @param n size of the identity matrix
+     * @return
+     */
     public static Matrix identity(int n)
     {
         Matrix m = new Matrix(n, n);
@@ -31,7 +41,7 @@ public class Matrix
 
 
     /**
-     * Generates a random matrix of size m x n
+     * Generates a random matrix of size m x n. The entries are picked at random, but will all be integers
      * @param m number f rows
      * @param n number of columns
      * @return matrix
@@ -42,13 +52,13 @@ public class Matrix
         Matrix mtx = new Matrix(m, n);
         for (int i = 0; i < m * n; i++)
         {
-            mtx.setValue(i, (double)r.nextInt(10));
+            mtx.setValue(i, (double)r.nextInt(10) -r.nextInt(10));
         }
         return mtx;
     }
 
     /** 
-     * Generates a random, non singular square matrix
+     * Generates a random, non singular (invertible) square matrix by applying random row operations
      * @param m size of produced matrix
      */
     public static Matrix randomNonSingular(int m)
@@ -90,14 +100,15 @@ public class Matrix
     };
 
     /**
-     * Generates a matrix with 1s along its diagonal;excepting those that have been removed so that its nullity and rank are appropriate 
+     * Generates a matrix with 1s along its diagonal;excepting those that have been removed so that its rank is rank
      * @param m number of rows
      * @param n number of columns
-     * @param nullity number of zero columns
+     * @param rank number of pivot columns / dim(col())
      * @return
      */
     public static Matrix baseMatrixOfRank(int m, int n, int rank)
     {
+        System.out.println("Rank " + rank);
         Matrix mtx = new Matrix(m, n);
         if(rank > m)
         {
@@ -114,25 +125,43 @@ public class Matrix
      * returns a random matrix of rank rank
      * @param m rows
      * @param n cols
-     * @param rank
+     * @param rank rank of the matrix to be produced. Must not be greater than m
      * @return
      */
     public static Matrix randomMatrixOfRank(int m, int n, int rank)
     {
-        return randomMatrixOfRank(m, rank, rank, DEFAULT_COMPLEXIFICATION);
+        return randomMatrixOfRank(m, n, rank, DEFAULT_COMPLEXIFICATION);
     }
 
     /**
-     * returns a randm matrix of ran rank
+     * returns a randm matrix of rank rank.
      * @param m rows
      * @param n cols
-     * @param rank
-     * @param stepBound
+     * @param rank rank of the matrix to be produced. Must not be greater than m
+     * @param stepBound number of steps of complexification
      * @return
      */
     public static Matrix randomMatrixOfRank(int m, int n, int rank, int stepBound)
     {
+        if(rank > m)
+        {
+            throw new IllegalArgumentException("Rank exceeds dimension of codomain");
+        };
+
         Matrix mtx = new Matrix(m,n);
+
+        Random rng = new Random();
+        
+        //First we generate a random upper triangular matrix
+        for(int i = 0;i < rank; i++)
+        {
+            mtx.setValue(i,i, 1.0);
+            for(int k = 0; k < i; k++)
+            {
+                mtx.setValue(i,k,0.0 + rng.nextInt(10) - rng.nextInt(10));
+            }
+        }
+
         mtx.complexify(stepBound);
         return mtx;
     }
@@ -154,7 +183,7 @@ public class Matrix
         return mtx;
     }
 
-        /**
+    /**
      * Performs random row operations on a matrix
      * The image, kernel, etc remain fixed
      * @param stepBound number of row operations to perform
@@ -179,10 +208,9 @@ public class Matrix
         }
     }
 
-
     
     /**
-     * performs an in-place swap row operation exchanging (a,b)
+     * performs an in-place swap row operation exchanging rows (a,b)
      * @param a first row
      * @param b secord row
      */
@@ -212,9 +240,9 @@ public class Matrix
     }
 
     /**
-     * 
-     * @param src
-     * @param dest
+     * performs the elementary row operation of adding two rows. 
+     * @param src The row to take as the addend
+     * @param dest the row that will be modified by adding src
      */
     public void addRows(int src, int dest)
     {
@@ -224,6 +252,12 @@ public class Matrix
         }
     }
 
+    /**
+     * determines if 'this' is equal to b. May produce dubious results due to floating point
+     * use roughlyEqual to compare with tolerance for fp sketchiness.
+     * @param b Matrix to compare with
+     * @return
+     */    
     public boolean isEqual(Matrix b)
     {
         if (this.m != b.m || this.n != b.n)
@@ -237,9 +271,26 @@ public class Matrix
         return true;
     }
 
+    /**
+     * Compare if two matrices are equal within default tolerance
+     * @param a first matrix
+     * @param b second matrix
+     * @return
+     */
     public static boolean roughlyEqual(Matrix a, Matrix b)
     {
-        final double tolerance = 0.001;
+        return roughlyEqual(a, b, 0.001);
+    }
+    
+    /**
+     * Compare if two matrcies are equal with a given tolerance
+     * @param a first matrix
+     * @param b second matrix
+     * @param tolerance maximum difference allowed between elements
+     * @return
+     */
+    public static boolean roughlyEqual(Matrix a, Matrix b,double tolerance)
+    {
         if(a.m != b.m || a.n != b.n)
         {
             return false;
@@ -254,6 +305,12 @@ public class Matrix
         return true;
     }
 
+    /**
+     * get the value at ith row and jth column of a matrix (from zero)
+     * @param i row
+     * @param j column
+     * @return
+     */
     public Double getValue(int i, int j)
     {
         return values[i * n + j];
@@ -264,6 +321,12 @@ public class Matrix
         return values[idx];
     }
 
+    /**
+     * Set the value at ith row and jth column
+     * @param i row
+     * @param j column
+     * @param value replacement value
+     */
     public void setValue(int i, int j, Double value)
     {
         values[i * n + j] = value;
@@ -296,6 +359,11 @@ public class Matrix
         return minor;
     }
 
+    /**
+     * get a given row as a vector
+     * @param row the index of the row starting from zero
+     * @return
+     */
     public RealVector getRow(int row)
     {
         RealVector v = new RealVector(n);
@@ -306,6 +374,11 @@ public class Matrix
         return v;
     }
 
+    /**
+     * Get a given column as a vector
+     * @param col the index of the column, starting from zero
+     * @return
+     */
     public RealVector getColumn(int col)
     {
         RealVector v = new RealVector(m);
@@ -315,6 +388,7 @@ public class Matrix
         }
         return v;
     }
+
 
     public Double determinant()
     {
@@ -334,7 +408,11 @@ public class Matrix
         return sum;
     }
 
-    public Matrix transpose()
+    /**
+     * returns the transpose of the matrix (does not modify it)
+     * @return
+     */
+    public Matrix getTranspose()
     {
         Matrix t = new Matrix(n, m);
         for (int i = 0; i < n; i++)
@@ -347,6 +425,11 @@ public class Matrix
         return t;
     }
 
+    /**
+     * returns the product of the matrix with b (i.e. this * b)
+     * @param b the matrix to multiply with
+     * @return
+     */
     public Matrix multiply(Matrix b) // this * b
     {
         Matrix result = new Matrix(this.n, b.m);
