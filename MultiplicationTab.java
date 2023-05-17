@@ -23,9 +23,12 @@ public class MultiplicationTab extends QuestionTab
     public MultiplicationTab(JPanel content)
     {
         super(content);
-        component.setLayout(new GridLayout(4, 5));
+        component.setLayout(new GridLayout(0, 3));
 
-        component.add(new JLabel("Find the inverse of this matrix: "));
+        component.add(new JPanel());
+        component.add(new JLabel("Multiply the matrices", SwingConstants.CENTER));
+        component.add(new JPanel());
+        component.add(new JLabel("X", SwingConstants.CENTER));
 
         // Setup matrix to invert
         random = new Random();
@@ -88,16 +91,15 @@ public class MultiplicationTab extends QuestionTab
         display2 = new MatrixDisplay(inner, outer2);
         display2.setValue(matrix2);
 
-        component.add(display1.getComponent(), 1);
-        component.add(new JLabel("X"), 2);
-        component.add(display2.getComponent(), 3);
+        component.add(display1.getComponent(), 3);
+        component.add(display2.getComponent(), 5);
 
         if (input != null)
             component.remove(input.getComponent());
 
         input = new MatrixInput(outer1, outer2);
 
-        component.add(input.getComponent(), 4);
+        component.add(input.getComponent(), 6);
     }
 
     public void testSuccess()
