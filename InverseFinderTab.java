@@ -16,9 +16,9 @@ public class InverseFinderTab extends QuestionTab
     static Random random;
     int difficulty = 3;
 
-    public InverseFinderTab(JPanel content)
+    public InverseFinderTab()
     {
-        super(content);
+        super(new JPanel());
         component.setLayout(new GridLayout(3, 5));
 
         component.add(new JLabel("Find the inverse of this matrix: "));
@@ -28,13 +28,13 @@ public class InverseFinderTab extends QuestionTab
         generateProblem();
 
         NormalButton submit = new NormalButton("Submit");
-        submit.setKeyHandler((ActionEvent e) -> {
+        submit.setClickHandler((ActionEvent e) -> {
             testSuccess();
         });
         component.add(submit);
 
         next = new NormalButton("Next");
-        next.setKeyHandler((ActionEvent e) -> {
+        next.setClickHandler((ActionEvent e) -> {
             generateProblem();
             input.clear();
             next.setVisible(false);

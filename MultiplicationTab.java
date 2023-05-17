@@ -20,25 +20,25 @@ public class MultiplicationTab extends QuestionTab
     static Random random;
     int difficulty = 3;
 
-    public MultiplicationTab(JPanel content)
+    public  MultiplicationTab()
     {
-        super(content);
+        super(new JPanel());
         component.setLayout(new GridLayout(4, 5));
 
-        component.add(new JLabel("Find the inverse of this matrix: "));
+        component.add(new JLabel("Multiply Matrices: "));
 
         // Setup matrix to invert
         random = new Random();
         generateProblem();
 
         NormalButton submit = new NormalButton("Submit");
-        submit.setKeyHandler((ActionEvent e) -> {
+        submit.setClickHandler((ActionEvent e) -> {
             testSuccess();
         });
         component.add(submit);
 
         next = new NormalButton("Next");
-        next.setKeyHandler((ActionEvent e) -> {
+        next.setClickHandler((ActionEvent e) -> {
             generateProblem();
             input.clear();
             next.setVisible(false);

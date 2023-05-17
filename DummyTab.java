@@ -9,9 +9,9 @@ import java.util.Random;
 public class DummyTab extends QuestionTab
 {
 
-    public DummyTab(JPanel content)
+    public DummyTab()
     {
-        super(content);
+        super(new JPanel());
         component.setLayout(new GridLayout(5, 5));
 
         component.add(new JLabel("Welcome to the dummy tab"));

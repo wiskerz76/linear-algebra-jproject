@@ -3,14 +3,34 @@ import java.util.Random;
 
 
 public class Question
-{
+{   
+    
     public final String question;
     public final Vector<String> options = new Vector<>(4, 0);
     public final int correct;
     public final int corval;
+    public final int questionType;
+    public final String explanation;
     
-    public Question(boolean answer, String query) 
+    public static final int BOOLEAN = 0;
+    public static final int NUMERIC = 1;
+
+
+    public Question(boolean answer, String query)
     {
+        this(answer, query, "");
+    }
+
+    public Question(int answer, String query)
+    {
+        this(answer, query, "");
+    }
+
+
+    public Question(boolean answer, String query, String explanation) 
+    {
+        this.questionType = BOOLEAN;
+        this.explanation = explanation;
         question = query;
         options.add("Yes");
         options.add("No");
@@ -18,24 +38,25 @@ public class Question
         corval = answer ? 1 : 0;
     }
 
-    public Question(int answer, String query)
+    public Question(int answer, String query, String explanation)
     {
+        this.questionType = NUMERIC;
+        this.explanation = explanation;
         Random rng = new Random();
         question = query;
         corval = answer;
         boolean inserted = false;
-        int c = 0;
+        correct = rng.nextInt(4);
         for(int i = 0; i < 4; i++)
         {
             //Insert the answer
-            if((i == 3) || !inserted && rng.nextBoolean())
+            if(i == correct)
             {
                 options.add("" + answer);
-                c = i;
             }
             else
             {
-                int r = rng.nextInt(2 * answer);
+                int r = rng.nextInt(Math.abs(5 * answer));
                 if(r == answer)
                 {
                     r += 1 + rng.nextInt(4);
@@ -43,21 +64,25 @@ public class Question
                 options.add("" + r);
             }
         }
-
-        correct = c;
     }
-    
+
+    public static Question getRandomQuestion()
+    {
+        Random r = new Random();
+        return getQuestion(r.nextInt(Question.BANK_SIZE));
+    }
+
     /**
      * This implements a question bank. 
      * @param ix the index of the question 
      * @return
      */
-    public Question getQuestion(int ix)
+    public static Question getQuestion(int ix)
     {
         Random rng = new Random();
         int i = rng.nextInt(100) + 1;
         int j = rng.nextInt(100) + 1;
-
+        int k = rng.nextInt(100) + 1;
         double x = rng.nextDouble();
         double y = rng.nextDouble();
 
@@ -103,8 +128,7 @@ public class Question
             case 7:
                 return new Question(
                     false,
-                    "Suppose that R is the set of real numbers (excluding zero)\n"
-                    + "Is it a vector space with addition of vectors given by multiplication"
+                    String.format("Can an isomorphism exist between the set of %d x %d matrices and R%d",i,j,i*j + k)
                 );
             case 8:
                 return new Question(
@@ -133,7 +157,7 @@ public class Question
                 return new Question(
                     true,
                     String.format("consider the set of polynomials of degree %d or less; can a linear transformation T exist to the set of %d x %d matrices\n"
-                        + "such that the kernel of T has an inverse",i * j, i, j)
+                        + "such that T has an inverse",i * j, i, j)
                 );
             case 13:
                 return new Question(
@@ -174,7 +198,7 @@ public class Question
             case 20:
                 return new Question(
                     i,
-                    String.format("Suppose that the set S spans R^%d and that all vectors in S are linearly independent; what is dim(R^%d)",i)
+                    String.format("Suppose that the set S spans R^%d and that all vectors in S are linearly independent; what is dim(S)",i)
                 );
             case 21:
                 return new Question(
@@ -263,7 +287,7 @@ public class Question
             case 37:
                 return new Question(
                     true,
-                    "Suppose that a matrix is row-reducible to the identity? Is it invertible"
+                    "Suppose that a matrix is row-reducible to the identity. Is it invertible?"
                 );
             case 38:
                 return new Question(

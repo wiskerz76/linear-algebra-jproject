@@ -30,7 +30,7 @@ public class NormalButton extends JButton {
     }
     
 
-    public void setKeyHandler(Consumer<ActionEvent> handler)
+    public void setClickHandler(Consumer<ActionEvent> handler)
     {
         KbCallbackCaller kbcc = new KbCallbackCaller(handler);
         this.addActionListener(kbcc);
