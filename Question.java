@@ -327,10 +327,35 @@ public class Question
                     0,
                     String.format("If T is a linear transformation from R%d -> R%d, and T^{-1} exists, then dim(kern(t)) = ?",i,i)
                 );
+            case 45:
+                return new Question(
+                    true,
+                    String.format("If for a matrix M and N, if MN = I, then M = N^-1")
+                );
+            case 46:
+                return new Question(
+                    false,
+                    String.format("If M = M^T, then M^-1 exists")
+                );
+            case 47:
+                return new Question(
+                    i * j * k,
+                    String.format("If M is similar to a diagonal matrix with eigenvalues %d, %d, %d, then its determinant is:",i,j,k)
+                );
+            case 48:
+                return new Question(
+                    i * j,
+                    String.format("If a 2x2 matrix has eigenvalues %d and %d, then its determinant is",i,j)
+                );
+            case 49:
+                return new Question(
+                    false,
+                    String.format("If a %d x %d matrix is equal to its transpose, then it must be diagonal",i,i)
+                );
             default:
                 throw new IllegalArgumentException("Invalid question index");
         }
     };
     
-    public static final int BANK_SIZE = 45;
+    public static final int BANK_SIZE = 50;
 }
