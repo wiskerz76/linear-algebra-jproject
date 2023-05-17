@@ -19,9 +19,9 @@ public class RankTab extends QuestionTab
     int difficulty = 3;
     int rank;
 
-    public RankTab(JPanel content)
+    public RankTab()
     {
-        super(content);
+        super();
         component.setLayout(new GridLayout(0, 2));
 
         component.add(new JLabel("Find the rank of the matrix", SwingConstants.CENTER));
@@ -31,13 +31,13 @@ public class RankTab extends QuestionTab
         generateProblem();
 
         NormalButton submit = new NormalButton("Submit");
-        submit.setKeyHandler((ActionEvent e) -> {
+        submit.setClickHandler((ActionEvent e) -> {
             testSuccess();
         });
         component.add(submit);
 
         next = new NormalButton("Next");
-        next.setKeyHandler((ActionEvent e) -> {
+        next.setClickHandler((ActionEvent e) -> {
             generateProblem();
             input.setText("");
             next.setVisible(false);

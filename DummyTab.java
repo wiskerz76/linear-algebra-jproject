@@ -11,7 +11,7 @@ public class DummyTab extends QuestionTab
 
     public DummyTab()
     {
-        super(new JPanel());
+        super();
         component.setLayout(new GridLayout(5, 5));
 
         component.add(new JLabel("Welcome to the dummy tab"));

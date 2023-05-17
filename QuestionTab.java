@@ -9,10 +9,17 @@ public class QuestionTab
 
     public JPanel content;
 
-    public QuestionTab(JPanel content)
+    /*public QuestionTab(JPanel content)
     {
         this.component = new JPanel();
         this.content = content;
+    }
+    */
+
+    public QuestionTab()
+    {
+        this.component = new JPanel();
+        this.content = new JPanel();
     }
 
     public void show()

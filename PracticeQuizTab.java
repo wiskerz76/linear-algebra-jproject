@@ -32,7 +32,7 @@ public class PracticeQuizTab extends QuestionTab
 
     public PracticeQuizTab()
     {
-        super(new JPanel());
+        super();
         
         // Initialize answer interstital
         

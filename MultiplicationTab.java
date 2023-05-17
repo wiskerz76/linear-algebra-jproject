@@ -24,7 +24,7 @@ public class MultiplicationTab extends QuestionTab
 
     public  MultiplicationTab()
     {
-        super(new JPanel());
+        super();
         component.setLayout(new GridLayout(0, 3));
 
         component.add(new JPanel());
