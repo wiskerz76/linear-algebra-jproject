@@ -19,6 +19,7 @@ public class MatrixDisplay
         this.n = n;
         component = new JPanel();
         component.setLayout(new GridLayout(m, n));
+        component.setBorder(BorderFactory.createMatteBorder(0, 5, 0, 5, Color.black));
 
         elements = new JLabel[m * n];
         for (int i = 0; i < m * n; i++)
