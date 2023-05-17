@@ -156,7 +156,9 @@ public class Matrix
         for(int i = 0;i < rank; i++)
         {
             mtx.setValue(i,i, 1.0);
-            for(int k = 0; k < i; k++)
+            
+            //Fill in with random values
+            for(int k = 0; k < n; k++)
             {
                 mtx.setValue(i,k,0.0 + rng.nextInt(10) - rng.nextInt(10));
             }
