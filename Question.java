@@ -212,7 +212,7 @@ public class Question
                 );
             case 23:
                 return new Question(
-                    false,
+                    true,
                     "Does the set of all invertible matrices form a vector space if vector addition is defined as matrix addition?"
                 );
             case 24:
@@ -320,12 +320,12 @@ public class Question
             case 43:
                 return new Question(
                      i,
-                     String.format("If T is a linear transformation from R%d -> R%d, and T^{-1} exists, then dim(Im(t)) = ?",i,i)
+                     String.format("If T is a linear transformation from R%d -> R%d, and T^{-1} exists, then dim(Im(T)) = ?",i,i)
                 );
             case 44:
                 return new Question(
                     0,
-                    String.format("If T is a linear transformation from R%d -> R%d, and T^{-1} exists, then dim(kern(t)) = ?",i,i)
+                    String.format("If T is a linear transformation from R%d -> R%d, and T^{-1} exists, then dim(kern(T)) = ?",i,i)
                 );
             case 45:
                 return new Question(
