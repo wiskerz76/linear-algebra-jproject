@@ -22,7 +22,11 @@ public class NormalSpinner extends JSpinner
         }
     }
 
-    public void setChangeHandler(Consumer<ChangeEvent> handler) 
+    /**
+     * Sets the function that runs when the value is changed
+     * @param handler callback handler
+     */
+    public void setChangeHandler(Consumer<ChangeEvent> handler)
     {
         this.addChangeListener(new ChangeCallbackCaller(handler));
     }

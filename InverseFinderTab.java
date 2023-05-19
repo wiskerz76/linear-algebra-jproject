@@ -5,7 +5,9 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
+/**
+ * A question tab that allows users to practice finding inverses
+ */
 public class InverseFinderTab extends QuestionTab
 {
     Matrix originalMatrix;

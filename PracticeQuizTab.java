@@ -9,7 +9,10 @@ import java.util.Vector;
 import java.util.List;
 import java.util.Random;
 
-
+/**
+ * This tab allows the user to answer a succession of multiple choice or field-response questions 
+ * from an included question bank. Feedback is given after each question answered.
+ */
 public class PracticeQuizTab extends QuestionTab 
 {
     private JPanel answer;
@@ -87,6 +90,8 @@ public class PracticeQuizTab extends QuestionTab
         integerOptionsDisplay.setLayout(integerOpBoxLayout);
 
         integerSelectionButtons = new NormalButton[4];
+
+        //Setup the multiple-choice answer buttons
         for(int i = 0;i < 4; i++)
         {
             final int k = i;
@@ -139,6 +144,7 @@ public class PracticeQuizTab extends QuestionTab
         component.add(questionContent,"question");
         component.add(answer,"answer");
         
+        //Load the first question for the user
         nextQuestion();        
     }
 

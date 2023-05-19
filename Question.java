@@ -79,13 +79,14 @@ public class Question
      */
     public static Question getQuestion(int ix)
     {
+
+        //Generate some random variables that can be reused.
         Random rng = new Random();
         int i = rng.nextInt(100) + 1;
         int j = rng.nextInt(100) + 1;
         int k = rng.nextInt(100) + 1;
-        double x = rng.nextDouble();
-        double y = rng.nextDouble();
 
+        //Lookup a question by index
         switch(ix)
         {
             case 0:
@@ -106,9 +107,8 @@ public class Question
                 );
             case 3:
                 return new Question(
-                    true,
-                    String.format("Consider the set of %d by %d matrices with non-zero entries on their diagonals\n"
-                    +"Is it a vector space, with addition of vectors given by matrix multiplication and scaling is by the function f(x,v) = v ?",i,i)
+                    false,
+                    "All linear transformations are injective or surjective"
                 );
             case 4: 
                 return new Question(
@@ -357,5 +357,8 @@ public class Question
         }
     };
     
+    /**
+     * The number of questions in the question bank.
+     */
     public static final int BANK_SIZE = 50;
 }
