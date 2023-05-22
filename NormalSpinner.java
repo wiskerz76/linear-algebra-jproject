@@ -11,6 +11,7 @@ import java.util.function.Consumer;
  */
 public class NormalSpinner extends JSpinner
 {
+    //This class exists to call the callback from within a change listener
     private class ChangeCallbackCaller implements ChangeListener
     {
         private Consumer<ChangeEvent> cb;
@@ -33,3 +34,4 @@ public class NormalSpinner extends JSpinner
         this.addChangeListener(new ChangeCallbackCaller(handler));
     }
 }
+

@@ -11,7 +11,7 @@ import java.util.Random;
 /**
  * A tab for users to practice multiplying matrices 
  */
-public class MultiplicationTab extends QuestionTab
+public class MultiplicationTab extends ContentTab
 {
     Matrix matrix1;
     Matrix matrix2;

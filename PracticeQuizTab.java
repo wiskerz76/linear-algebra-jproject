@@ -13,7 +13,7 @@ import java.util.Random;
  * This tab allows the user to answer a succession of multiple choice or field-response questions 
  * from an included question bank. Feedback is given after each question answered.
  */
-public class PracticeQuizTab extends QuestionTab 
+public class PracticeQuizTab extends ContentTab 
 {
     private JPanel answer;
     private JLabel answerText;

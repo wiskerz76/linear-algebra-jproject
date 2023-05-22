@@ -10,7 +10,7 @@ import java.lang.Runnable;
 
 public class TabSwitcher
 {
-    private QuestionTab[] tabs;
+    private ContentTab[] tabs;
     private JTabbedPane component;
 
     public JTabbedPane getComponent()
@@ -18,7 +18,7 @@ public class TabSwitcher
         return component;
     }
 
-    public TabSwitcher(QuestionTab[] tabs, String[] names)
+    public TabSwitcher(ContentTab[] tabs, String[] names)
     {
         this.tabs = tabs;
         //this.component = new JPanel();

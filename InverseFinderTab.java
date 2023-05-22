@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * A question tab that allows users to practice finding inverses
  */
-public class InverseFinderTab extends QuestionTab
+public class InverseFinderTab extends ContentTab
 {
     Matrix originalMatrix;
     MatrixInput input;

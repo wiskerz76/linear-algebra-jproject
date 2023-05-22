@@ -49,7 +49,7 @@ public class Project extends JFrame
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         JPanel content = new JPanel(); // Panel to contain contents of each tab
-        QuestionTab[] tabs = new QuestionTab[] {
+        ContentTab[] tabs = new ContentTab[] {
             new InverseFinderTab(),
             new MultiplicationTab(), // TODO: Refactor the code to not take in this panel and create it internally in the Question Tab class
             new RankTab(),

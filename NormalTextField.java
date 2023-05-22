@@ -34,7 +34,7 @@ public class NormalTextField extends JTextField {
     }
     
     /**
-     * 
+     * set the handler that is called when the key is pressed 
      * @param handler
      */
     public void setKeyHandler(Consumer<KeyEvent> handler)

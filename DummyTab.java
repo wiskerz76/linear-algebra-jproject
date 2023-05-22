@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class DummyTab extends QuestionTab
+public class DummyTab extends ContentTab
 {
 
     public DummyTab()

@@ -5,6 +5,10 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class provides a form for users to input a matrix
+ * It displays a n x m grid of numeric inputs and returns their value interpreted as a Matrix
+ */
 public class MatrixInput
 {
     JComponent component;
@@ -13,6 +17,11 @@ public class MatrixInput
     int m;
     int n;
 
+    /**
+     * Construct a matrix input of size m x n 
+     * @param m number of rows
+     * @param n number of columns
+     */
     public MatrixInput(int m, int n)
     {
         this.m = m;
@@ -33,6 +42,10 @@ public class MatrixInput
         }
     }
 
+    /**
+     * Returns the matrix that the user has presently input
+     * @return
+     */
     public Matrix getValue()
     {
         Matrix matrix = new Matrix(m, n);
@@ -49,6 +62,9 @@ public class MatrixInput
         return component;
     }
 
+    /**
+     * removes any user input
+     */
     public void clear()
     {
         for (int i = 0; i < fields.length; i++)
