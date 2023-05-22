@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
+/**
+ * This is the main class for the project. It initializes the window, loads in all the tabs, etc.
+ */
 public class Project extends JFrame
 {
     static final int WIDTH = 750;
@@ -47,7 +51,6 @@ public class Project extends JFrame
         JPanel content = new JPanel(); // Panel to contain contents of each tab
         QuestionTab[] tabs = new QuestionTab[] {
             new InverseFinderTab(),
-            new DummyTab(),
             new MultiplicationTab(), // TODO: Refactor the code to not take in this panel and create it internally in the Question Tab class
             new RankTab(),
             new PracticeQuizTab()
@@ -55,7 +58,6 @@ public class Project extends JFrame
 
         String[] names = new String[]{
             "Inverse Practice",
-            "Dummy",
             "Multiplication Practice",
             "Rank Practice",
             "Practice Quiz"

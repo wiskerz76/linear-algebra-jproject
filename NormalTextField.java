@@ -33,12 +33,20 @@ public class NormalTextField extends JTextField {
         }
     }
     
+    /**
+     * 
+     * @param handler
+     */
     public void setKeyHandler(Consumer<KeyEvent> handler)
     {
         KbCallbackCaller kbcc = new KbCallbackCaller(handler);
         this.addKeyListener(kbcc);
     }
 
+    /**
+     * Returns the value that is contained within the text field as a double, or throws an exception
+     * @return
+     */
     public double getValue()
     {
         String input = this.getText();
