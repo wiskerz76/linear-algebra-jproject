@@ -3,7 +3,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
 
-public class QuestionTab
+public class ContentTab
 {
     public JComponent component;
 
@@ -16,7 +16,7 @@ public class QuestionTab
     }
     */
 
-    public QuestionTab()
+    public ContentTab()
     {
         this.component = new JPanel();
         this.content = new JPanel();
