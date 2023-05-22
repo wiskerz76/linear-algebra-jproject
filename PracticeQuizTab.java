@@ -1,6 +1,5 @@
 import java.awt.*;
 
-import javax.lang.model.util.ElementScanner14;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
@@ -59,7 +58,7 @@ public class PracticeQuizTab extends ContentTab
         answer.add(scoreText);
 
         answerButton = new NormalButton("Next Question");
-        answerButton.setClickHandler((var e) -> {
+        answerButton.setClickHandler((ActionEvent e) -> {
             nextQuestion();
         });
         answer.add(answerButton);
@@ -87,11 +86,11 @@ public class PracticeQuizTab extends ContentTab
         booleanOptionsDisplay.setLayout(booleanOpBoxLayout);
 
         NormalButton trueButton = new NormalButton("True");
-        trueButton.setClickHandler((var e) -> {handleSelectAnswer(0);});
+        trueButton.setClickHandler((ActionEvent e) -> {handleSelectAnswer(0);});
         booleanOptionsDisplay.add(trueButton);
 
         NormalButton falseButton = new NormalButton("False");
-        falseButton.setClickHandler((var e) -> {handleSelectAnswer(1);});
+        falseButton.setClickHandler((ActionEvent e) -> {handleSelectAnswer(1);});
         booleanOptionsDisplay.add(falseButton);
 
         //Initialize the integer multiple choice card
@@ -106,7 +105,7 @@ public class PracticeQuizTab extends ContentTab
         {
             final int k = i;
             NormalButton btn = new NormalButton("");
-            btn.setClickHandler((var e) -> {
+            btn.setClickHandler((ActionEvent e) -> {
                 handleSelectAnswer(k);
             });
 
@@ -125,7 +124,7 @@ public class PracticeQuizTab extends ContentTab
 
         NormalButton submit = new NormalButton("Submit");
     
-        submit.setClickHandler((var e) -> {
+        submit.setClickHandler((ActionEvent e) -> {
             String text = responseField.getText();
             try {
                 int val = Integer.parseInt(text);

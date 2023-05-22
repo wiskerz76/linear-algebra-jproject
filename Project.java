@@ -53,14 +53,18 @@ public class Project extends JFrame
             new InverseFinderTab(),
             new MultiplicationTab(), // TODO: Refactor the code to not take in this panel and create it internally in the Question Tab class
             new RankTab(),
-            new PracticeQuizTab()
+            new PracticeQuizTab(),
+            new FileTab("info.txt"),
+            new FileTab("LICENSE")
         };
 
         String[] names = new String[]{
             "Inverse Practice",
             "Multiplication Practice",
             "Rank Practice",
-            "Practice Quiz"
+            "Practice Quiz",
+            "Info",
+            "LICENSE"
         };
         Container pane = getContentPane();
         TabSwitcher tabSwitcher = new TabSwitcher(tabs, names); 
