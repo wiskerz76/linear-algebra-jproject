@@ -17,7 +17,6 @@ public class InverseFinderTab extends QuestionTab
     MatrixDisplay display;
     static Random random;
     int difficulty = 3;
-
     public InverseFinderTab()
     {
         super();
@@ -48,6 +47,9 @@ public class InverseFinderTab extends QuestionTab
         component.add(next);
     }
 
+    /**
+     * Create a new invertible matrix and set it up to be displayed to the user
+     */
     public void generateProblem()
     {
         if (display != null)
@@ -66,6 +68,8 @@ public class InverseFinderTab extends QuestionTab
         {
             size = random.nextInt(3) + 1;
         }
+
+        //We get a non-singular matrix so that M^-1 exists
         originalMatrix = Matrix.randomNonSingular(size, difficulty);
         display = new MatrixDisplay(size, size);
         display.setValue(originalMatrix);
@@ -78,11 +82,20 @@ public class InverseFinderTab extends QuestionTab
         component.add(input.getComponent(), 2);
     }
 
+    /**
+     * Determines if the user has computed the inverse correctly.
+     */
     public void testSuccess()
     {
 
         Matrix product = input.getValue().multiply(originalMatrix);
         System.out.println(product);
+
+        /*
+         * We use roughlyEqual to prevent floating point silliness. 
+         * This gives the user the benefit of the doubt,
+         * but it's pretty unlikely they'll make a mistake and still get within +- 0.1%
+         */
         if (Matrix.roughlyEqual(product, Matrix.identity(product.n)))
         {
             result.setText("Correct!");

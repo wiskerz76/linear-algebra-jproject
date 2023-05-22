@@ -6,7 +6,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.function.Consumer;
 
-
+/**
+ * A numeric input field. This extends the JSpinner class with a callback-style interface
+ */
 public class NormalSpinner extends JSpinner
 {
     private class ChangeCallbackCaller implements ChangeListener

@@ -17,28 +17,37 @@ public class PracticeQuizTab extends QuestionTab
 {
     private JPanel answer;
     private JLabel answerText;
+    private JLabel scoreText;
     private NormalButton answerButton;
 
     private JPanel questionContent;
     private JTextArea questionText;
-    
     private JPanel answerContainer;
     private NormalButton[] integerSelectionButtons;
     private CardLayout answerSelector;
 
-
+    //This switches between the question and answer interface
     private CardLayout flipLayout;
 
-    
     private Question currentQuestion;
+    /**
+     * The number of correct answers given
+     */
+    private int score;
 
+    /**
+     * The number of total questions asked
+     */
+    private int total;
 
+    /**
+     * Initialize the PracticeQuizTab
+     */
     public PracticeQuizTab()
     {
         super();
         
         // Initialize answer interstital
-        
         answer = new JPanel();
         BoxLayout boxLayout = new BoxLayout(answer, BoxLayout.Y_AXIS);
         answer.setLayout(boxLayout);
@@ -46,15 +55,16 @@ public class PracticeQuizTab extends QuestionTab
         answerText = new JLabel();
         answer.add(answerText);
 
+        scoreText = new JLabel();
+        answer.add(scoreText);
+
         answerButton = new NormalButton("Next Question");
         answerButton.setClickHandler((var e) -> {
             nextQuestion();
         });
         answer.add(answerButton);
 
-
-        // Initialize question interstital
-
+        //Initialize the question display
         questionContent = new JPanel();
         BoxLayout boxLayout2 = new BoxLayout(questionContent, BoxLayout.Y_AXIS);
         questionContent.setLayout(boxLayout2);
@@ -148,15 +158,33 @@ public class PracticeQuizTab extends QuestionTab
         nextQuestion();        
     }
 
-    private void incorrect()
+    //
+    private void displayInterstital()
     {
         flipLayout.show(component,"answer");
+        String scoreStr = String.format("Score %.2f %% (%d / %d)", score * 100.0 / total, score, total);
+        scoreText.setText(scoreStr);
+    }
+
+    /**
+     * called when the user gets an incorrect answer
+     */
+    private void incorrect()
+    {
+
+        //flipLayout.show(component,"answer");
+        displayInterstital();
         answerText.setText("Incorrect");
     }
 
+    /**
+     * called when the user gets an answer correct
+     */
     private void correct()
     {
-        flipLayout.show(component,"answer");
+        score += 1;
+        displayInterstital();
+        //flipLayout.show(component,"answer");
         answerText.setText("Correct");
     }
 
@@ -186,6 +214,9 @@ public class PracticeQuizTab extends QuestionTab
 
     private void nextQuestion() 
     {
+        //Incremenet the number of questions that have been asked
+        total += 1;
+
         Random r = new Random();
         currentQuestion = Question.getRandomQuestion();
         flipLayout.show(component, "question");

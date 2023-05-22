@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * A tab for users to practice multiplying matrices 
+ */
 public class MultiplicationTab extends QuestionTab
 {
     Matrix matrix1;
@@ -22,8 +25,12 @@ public class MultiplicationTab extends QuestionTab
     static Random random;
     int difficulty = 3;
 
+    /**
+     * Construct the MultiplicationTab
+     */
     public  MultiplicationTab()
     {
+        //Setup the layout of the tab
         super();
         component.setLayout(new GridLayout(0, 3));
 
@@ -55,6 +62,9 @@ public class MultiplicationTab extends QuestionTab
         component.add(next);
     }
 
+    /**
+     * Create and display two matrices that the user can multiply
+     */
     public void generateProblem()
     {
         if (display1 != null)
@@ -104,6 +114,9 @@ public class MultiplicationTab extends QuestionTab
         component.add(input.getComponent(), 6);
     }
 
+    /**
+     * Determine if the user has managed to multiply the matrices sucessfully
+     */
     public void testSuccess()
     {
         Matrix product = matrix1.multiply(matrix2);
