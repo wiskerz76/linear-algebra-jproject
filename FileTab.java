@@ -42,6 +42,7 @@ public class FileTab extends ContentTab
         content.setLayout(boxLayout);
 
         JTextArea text = new JTextArea(data, 100, 100);
+        text.setEditable(false);
         text.setLineWrap(true);
         JScrollPane pane = new JScrollPane(text, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         component.setLayout(new BoxLayout(component, BoxLayout.Y_AXIS));

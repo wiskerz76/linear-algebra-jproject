@@ -30,8 +30,8 @@ public class Question
         this.questionType = BOOLEAN;
         this.explanation = explanation;
         question = query;
-        options.add("Yes");
-        options.add("No");
+        options.add("True");
+        options.add("False");
         correct = answer ? 0 : 1;
         corval = answer ? 1 : 0;
     }
@@ -130,36 +130,36 @@ public class Question
             case 7:
                 return new Question(
                     false,
-                    String.format("Can an isomorphism exist between the set of %d x %d matrices and R%d",i,j,i*j + k)
+                    String.format("Can an isomorphism exist between the set of %d x %d matrices and R%d?",i,j,i*j + k)
                 );
             case 8:
                 return new Question(
                     true,
                     "Suppose that R is the set of real numbers \n"
-                    + "Is it a vector space with addition of vectors given by addition"
+                    + "Is it a vector space with addition of vectors given by addition?"
                 );
             case 9:
                 return new Question(
                     false,
                     "Suppose that R is the set of real numbers \n"
-                    + "Is it a vector space with addition of vectors given by multiplication"
+                    + "Is it a vector space with addition of vectors given by multiplication?"
                 );
             case 10:
                 return new Question(
                     false,
-                    String.format("Suppose that f is a linear transformation from the set {0} to the set R%d; can f be a bijection", i + 2)
+                    String.format("Suppose that f is a linear transformation from the set {0} to the set R%d; can f be a bijection?", i + 2)
                 );
             case 11:
                 return new Question(
                     true,
-                    String.format("consider the set of polynomials of degree %d or less; can a linear transformation T exist to the set of %d x %d matrices\n"
-                        + "such that the kernel of T has dimension zero",i * j, i, j)
+                    String.format("Consider the set of polynomials of degree %d or less; can a linear transformation T exist to the set of %d x %d matrices\n"
+                        + "such that the kernel of T has dimension zero?",i * j, i, j)
                 );
             case 12:
                 return new Question(
                     true,
-                    String.format("consider the set of polynomials of degree %d or less; can a linear transformation T exist to the set of %d x %d matrices\n"
-                        + "such that T has an inverse",i * j, i, j)
+                    String.format("Consider the set of polynomials of degree %d or less; can a linear transformation T exist to the set of %d x %d matrices\n"
+                        + "such that T has an inverse?",i * j, i, j)
                 );
             case 13:
                 return new Question(
@@ -170,12 +170,12 @@ public class Question
             case 14:
                 return new Question(
                     true,
-                    "Suppose that matrices P and Q are similar. Does this imply that P and Q have the same determinant"
+                    "Suppose that matrices P and Q are similar. Does this imply that P and Q have the same determinant?"
                 );
             case 15:
                 return new Question(
                     i, 
-                    String.format("If dim(W) is %d, and H represents a surjection from R%d to W, then the rank of H is:?",i, i + j)
+                    String.format("If dim(W) is %d, and H represents a surjection from R%d to W, then the rank of H is:",i, i + j)
                 );
             case 16:
                 return new Question(
@@ -195,17 +195,17 @@ public class Question
             case 19:
                 return new Question(
                     i,
-                    String.format("What is the dimension of R^%d",i)
+                    String.format("What is the dimension of R^%d?",i)
                 );
             case 20:
                 return new Question(
                     i,
-                    String.format("Suppose that the set S spans R^%d and that all vectors in S are linearly independent; what is dim(S)",i)
+                    String.format("Suppose that the set S spans R^%d and that all vectors in S are linearly independent; what is dim(S)?",i)
                 );
             case 21:
                 return new Question(
                     i,
-                    String.format("Suppose that f(x) = Mx is a surjection onto V. If the rank of M is %d, what is the dimension of V", i)
+                    String.format("Suppose that f(x) = Mx is a surjection onto V. If the rank of M is %d, what is the dimension of V?", i)
                 );
             case 22:
                 return new Question(
@@ -225,22 +225,22 @@ public class Question
             case 25:
                 return new Question(
                     1,
-                    String.format("Suppose that v1 and v2 are non-zero vectors in R%d, such that for some scalar x, v1 = x*v2. What is dim(span{v1,v2})", i + 1)
+                    String.format("Suppose that v1 and v2 are non-zero vectors in R%d, such that for some scalar x, v1 = x*v2. What is dim(span{v1,v2})?", i + 1)
                 );
             case 26:
                 return new Question(
                     i,
-                    String.format("What is the rank of the matrix M such that for every vector x in R%d, Mx = x", i)
+                    String.format("What is the rank of the matrix M such that for every vector x in R%d, Mx = x?", i)
                 );
             case 27:
                 return new Question(
                     i,
-                    String.format("Suppose that M is a %d x %d matrix such that the nullity of M is %d. What is the rank of M", i + j, i + j, j)
+                    String.format("Suppose that M is a %d x %d matrix such that the nullity of M is %d. What is the rank of M?", i + j, i + j, j)
                 );
             case 28:
                 return new Question(
                     i,
-                    String.format("Suppose that M is a %d x %d matrix such that the rank of M is %d. What is the nullity of M", i + j, i + j, j)
+                    String.format("Suppose that M is a %d x %d matrix such that the rank of M is %d. What is the nullity of M?", i + j, i + j, j)
                 );
             case 29:
                 i -= 50;
@@ -284,7 +284,7 @@ public class Question
             case 36:
                 return new Question(
                     true,
-                    String.format("Is there a pair of %d x %d matrices such that det(A + B) = det(BA)",i + 1 ,i + 1)
+                    String.format("Is there a pair of %d x %d matrices such that det(A + B) = det(BA)?",i + 1 ,i + 1)
                 );
             case 37:
                 return new Question(
@@ -299,7 +299,7 @@ public class Question
             case 39:
                 return new Question(
                     i,
-                    String.format("If a space V is spanned by %d linearly independent vectors, what is dim(V)", i)
+                    String.format("If a space V is spanned by %d linearly independent vectors, what is dim(V)?", i)
                 );
             case 40:
                 return new Question(
@@ -347,7 +347,7 @@ public class Question
             case 48:
                 return new Question(
                     i * j,
-                    String.format("If a 2x2 matrix has eigenvalues %d and %d, then its determinant is",i,j)
+                    String.format("If a 2x2 matrix has eigenvalues %d and %d, then its determinant is:",i,j)
                 );
             case 49:
                 return new Question(
