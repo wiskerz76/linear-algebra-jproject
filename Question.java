@@ -15,7 +15,6 @@ public class Question
     public static final int BOOLEAN = 0;
     public static final int NUMERIC = 1;
 
-
     public Question(boolean answer, String query)
     {
         this(answer, query, "");
@@ -25,7 +24,6 @@ public class Question
     {
         this(answer, query, "");
     }
-
 
     public Question(boolean answer, String query, String explanation) 
     {
@@ -56,8 +54,8 @@ public class Question
             }
             else
             {
-                int r = rng.nextInt(Math.abs(5 * answer));
-                if(r == answer)
+                int r = rng.nextInt(Math.abs(5 * answer) + 1);
+                while(r == answer || options.contains(r + ""))
                 {
                     r += 1 + rng.nextInt(4);
                 }
@@ -66,6 +64,10 @@ public class Question
         }
     }
 
+    /**
+     * Returns a random question from the question bank
+     * @return
+     */
     public static Question getRandomQuestion()
     {
         Random r = new Random();
@@ -208,11 +210,11 @@ public class Question
             case 22:
                 return new Question(
                     true,
-                    "Suppose that V is a subspace of R^%d. Is V a vector space?"
+                    String.format("Suppose that V is a subspace of R^%d. Is V a vector space?", k > 70 ? i * j * k : j)
                 );
             case 23:
                 return new Question(
-                    true,
+                    false,
                     "Does the set of all invertible matrices form a vector space if vector addition is defined as matrix addition?"
                 );
             case 24:
@@ -352,13 +354,74 @@ public class Question
                     false,
                     String.format("If a %d x %d matrix is equal to its transpose, then it must be diagonal",i,i)
                 );
+            case 50:
+                return new Question(
+                    false,
+                    "A vector space is closed under vector multiplication"
+                );
+            case 51:
+                return new Question(
+                    true,
+                    "A subspace includes the zero vector"
+                );
+            case 52:
+                return new Question(
+                    false,
+                    String.format("The subset of R%d of vectors with magnitude greater than %d is a subspace", i,j)
+                );
+            case 53:
+                return new Question(
+                    false,
+                    "All subsets of vector spaces are subspaces"                
+                );
+            case 54:
+                return new Question(
+                    true,
+                    String.format("All subspaces of R%d are vector spaces",i)
+                );
+            case 55:
+                return new Question(
+                    true,
+                    String.format("The the set {0} is a subspace of R%d",k > 70 ? i * j * k : i)
+                );
+            case 56:
+                return new Question(
+                    true,
+                    "If a matrix is invertible, then the dimension of the span of its columns is equal to the number of its rows"
+                );
+            case 57:
+                StringBuilder b = new StringBuilder("v1");
+                for(int n = 0; n < i %8; n++)
+                {
+                    b.append(String.format(", v%d",n + 2));
+                }
+                return new Question(
+                    false,
+                    String.format("If a subspace of R%d is spanned by " 
+                            + b.toString() +
+                            " then its dimension is %d",
+                            j,
+                            i % 8
+                        )
+                );
+            case 58:
+                return new Question(
+                    true,
+                    "There exist vectors p and q in R2 such that all vectors in R2 can be writen as ap + bq for some scalars a, b"
+                );
+            case 59:
+                return new Question(
+                    false,
+                    String.format("For two subspaces W & V of R%d, the dimension of their union = dim(W) + dim(V)",i)
+                );
             default:
                 throw new IllegalArgumentException("Invalid question index");
         }
     };
     
+
     /**
      * The number of questions in the question bank.
      */
-    public static final int BANK_SIZE = 50;
+    public static final int BANK_SIZE = 60; // This i\needs to be kept up to date with the actual bank
 }

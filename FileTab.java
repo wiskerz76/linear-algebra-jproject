@@ -27,7 +27,13 @@ public class FileTab extends ContentTab
             }
         } catch (FileNotFoundException e)
         {
-            data = "File not found. You may be using a pirated version of this software, which may provide a sub-par experience";
+            data = "File not found.";
+            JOptionPane.showMessageDialog(
+                null,
+                "Missing or corrupted files. You may be using a pirated version of this software, which may provide a sub-par experience",
+                "Missing Files",
+                JOptionPane.ERROR_MESSAGE
+            );
         } catch (java.util.NoSuchElementException e)
         {
         }
@@ -36,6 +42,7 @@ public class FileTab extends ContentTab
         content.setLayout(boxLayout);
 
         JTextArea text = new JTextArea(data, 100, 100);
+        text.setLineWrap(true);
         JScrollPane pane = new JScrollPane(text, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         component.setLayout(new BoxLayout(component, BoxLayout.Y_AXIS));
         component.add(pane);

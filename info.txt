@@ -1,2 +1,41 @@
-How to use:
-Ben, write something here!
+The Linear Algebra JPractice application is a Java-based software system for students to practice linear algebra. 
+It is reccomended to be used to reinforce concepts that are learned in class.
+The system includes multiple different views which be selected using the tabs located along the top of the application window. 
+These allow the student to focus on practicing a particular skill.
+
+
+== INVERSE PRACTICE ==
+The inverse practice tab is for practicing the important skill of computing the inverses of matrices. 
+A matrix is displayed, and an interface is provided to input its inverse. 
+Linear Algebra JPractice Software will then validate if it is in fact the correct value, and print the corresponding message. 
+
+
+== MULTIPLICATION PRACTICE ==
+This tab is for practicing the fundamental skill of matrix multiplication. Two matrices are displayed and the user inputs their product.
+Feedback will then be given about the validity of the product matrix input.
+
+
+== RANK PRACTICE ==
+This tab allows for a student to practice finding the rank of a matrix. A matrix is displayed, and the student is to input the value of the rank of the matrix.
+The rank should be input as a natural number. The program reports back if the rank has been computed correctly
+
+== PRACTICE QUIZ ==
+This provides an experience that is more similar to that of taking a quiz or test. In this tab, the student is presented with a series of questions.
+These questions cover a range of topics that are essential to a linear algebra student. 
+The question bank includes questions that cover the concepts of:
+
+- Rank & Nullity
+- Determinants
+- Eigenvalues & Eigenvectors
+- Linear Transformations
+- Vector Spaces
+- Subspaces
+- Span & Basis
+
+The questions vary between true/false, multiple-choice, and numeric free-response. 
+This provides a varied experience that may more closely match actual assignments.
+The questions are generated randomly from a bank. after each question, the user is told if they are correct or incorrect.
+If they are incorrect, the correct answer is shown. Additionally, a running score is kept and displayed after every submitted question
+
+== LICENSE & INFO ==
+These tabs display information about the program and how to use it, including this help file and the program license

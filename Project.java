@@ -44,7 +44,7 @@ public class Project extends JFrame
     public Project()
     {
         // Setup window
-        setTitle("Linear Algebra Project");
+        setTitle("Linear Algebra JPractice");
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -64,7 +64,7 @@ public class Project extends JFrame
             "Rank Practice",
             "Practice Quiz",
             "Info",
-            "LICENSE"
+            "License"
         };
         Container pane = getContentPane();
         TabSwitcher tabSwitcher = new TabSwitcher(tabs, names); 

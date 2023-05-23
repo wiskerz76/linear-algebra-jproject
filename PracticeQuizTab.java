@@ -14,10 +14,12 @@ import java.util.Random;
  */
 public class PracticeQuizTab extends ContentTab 
 {
+    
     private JPanel answer;
     private JLabel answerText;
     private JLabel scoreText;
     private NormalButton answerButton;
+
 
     private JPanel questionContent;
     private JTextArea questionText;
@@ -25,7 +27,9 @@ public class PracticeQuizTab extends ContentTab
     private NormalButton[] integerSelectionButtons;
     private CardLayout answerSelector;
 
-    //This switches between the question and answer interface
+    /**
+     * Allows for selecting view between question and ansewr
+     */
     private CardLayout flipLayout;
 
     private Question currentQuestion;
@@ -57,6 +61,7 @@ public class PracticeQuizTab extends ContentTab
         scoreText = new JLabel();
         answer.add(scoreText);
 
+        //Initialize the next question button
         answerButton = new NormalButton("Next Question");
         answerButton.setClickHandler((ActionEvent e) -> {
             nextQuestion();
@@ -139,7 +144,7 @@ public class PracticeQuizTab extends ContentTab
         
         integerInput.add(submit);
 
-        //Add the cards
+        //Attach all 3 of the different answering options
         answerContainer.add(booleanOptionsDisplay,"boolean");
         answerContainer.add(integerOptionsDisplay,"integerOptions");
         answerContainer.add(integerInput,"integerInput");
@@ -157,7 +162,9 @@ public class PracticeQuizTab extends ContentTab
         nextQuestion();        
     }
 
-    //
+    /**
+     * Shows the view that occurs between questions (interstital)
+     */
     private void displayInterstital()
     {
         flipLayout.show(component,"answer");
@@ -173,7 +180,7 @@ public class PracticeQuizTab extends ContentTab
 
         //flipLayout.show(component,"answer");
         displayInterstital();
-        answerText.setText("Incorrect");
+        answerText.setText("Incorrect. The correct answer was " + currentQuestion.options.get(currentQuestion.correct));
     }
 
     /**
@@ -187,6 +194,10 @@ public class PracticeQuizTab extends ContentTab
         answerText.setText("Correct");
     }
 
+    /**
+     * Handles user input for the questions when a number entry field is shown
+     * @param answer
+     */
     private void handleInputAnswer(int answer)
     {
         if(answer == currentQuestion.corval)
@@ -199,6 +210,10 @@ public class PracticeQuizTab extends ContentTab
         }
     }
 
+    /**
+     * Handles user input for the questions that are presented in a multiple choice manner
+     * @param clickIx
+     */
     private void handleSelectAnswer(int clickIx)
     {
         //We show the correct interstital content when the user selects an answer  
@@ -211,24 +226,32 @@ public class PracticeQuizTab extends ContentTab
         }
     }
 
+    /**
+     * Displays a new question in the area of the PracticeQuizTab
+     */
     private void nextQuestion() 
     {
         //Incremenet the number of questions that have been asked
         total += 1;
 
         Random r = new Random();
+        
+        //get a new questions
         currentQuestion = Question.getRandomQuestion();
+
+        //change to show the question instead of interstital
         flipLayout.show(component, "question");
 
         
         questionText.setText(currentQuestion.question);
         
-
+        //Show the appropriate interface for a given question type
         switch(currentQuestion.questionType)
         {
             case Question.BOOLEAN:
                 answerSelector.show(answerContainer,"boolean");
                 break;
+            
             case Question.NUMERIC:
                 if(r.nextBoolean())
                 {
